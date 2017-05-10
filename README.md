@@ -41,7 +41,7 @@ here.
 * `PROVISSION_COMMANDS_LIST`: This is a list in which you will specify all the
 commands (e.g., apt-get) for machine provission.
 
-All you need to do now is run `make create_stack`, and it will be done. When
+All you need to do now is run `make deploy`, and it will be done. When
 you want to delete the stack, run `make delete_stack`.
 
 ## Caveats
