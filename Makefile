@@ -2,7 +2,7 @@ CURRENT_DIR = $(shell pwd)
 STACK_NAME = my-stack
 JSON_FILE = multiple.json
 
-create_json:
+create_template:
 	python template_maker.py > $(JSON_FILE)
 
 create_stack: create_json
@@ -10,3 +10,8 @@ create_stack: create_json
 
 delete_stack:
 	aws cloudformation delete-stack --stack-name $(STACK_NAME)
+
+deploy: create_template create_stack
+
+clean:
+	rm $(JSON_FILE)
