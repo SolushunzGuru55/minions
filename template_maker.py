@@ -1,8 +1,13 @@
 # Remember: EIP creation limit it 5. You have to request for more. See here:
 # https://forums.aws.amazon.com/message.jspa?messageID=351512
 
-from troposphere import Template, Output, Ref, Base64, GetAtt, Join
-import troposphere.ec2 as ec2
+import sys
+try:
+    from troposphere import Template, Output, Ref, Base64, GetAtt, Join
+    import troposphere.ec2 as ec2
+except ImportError:
+    sys.stderr.write("You need the troposphere dependency. See https://github.com/cloudtools/troposphere\n")
+    sys.exit(1)
 
 NUMBER_OF_MACHINES = 2
 INSTANCE_TYPE = 't2.micro'
