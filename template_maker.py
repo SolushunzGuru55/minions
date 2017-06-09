@@ -3,7 +3,7 @@
 
 import sys
 try:
-    from troposphere import Template, Output, Ref, Base64, GetAtt, Join
+    from troposphere import Template, Output, Ref, Base64, GetAtt, Join, Tags
     import troposphere.ec2 as ec2
 except ImportError:
     sys.stderr.write("You need the troposphere dependency. See https://github.com/cloudtools/troposphere\n")
@@ -16,6 +16,9 @@ KEY_PAIR_NAME = 'minions-keypair'
 PROVISSION_COMMANDS_LIST = [
     'sudo apt-get -y update',
     'sudo apt-get -y install htop',
+    "sudo wget https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install -O install_aws_inspector",
+    "sudo bash install_aws_inspector",
+    "sudo rm install_aws_inspector",
 ]
 
 def get_user_data():
@@ -63,7 +66,8 @@ if __name__ == '__main__':
                 InstanceType = INSTANCE_TYPE,
                 KeyName = KEY_PAIR_NAME,
                 SecurityGroups = [Ref(security_group)],
-                UserData = get_user_data()
+                UserData = get_user_data(),
+                Tags = Tags(SecurityClass = "ec2-inspector-target")
             )
         )
 
