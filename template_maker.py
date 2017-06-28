@@ -16,6 +16,9 @@ KEY_PAIR_NAME = 'minions-keypair'
 PROVISSION_COMMANDS_LIST = [
     'sudo apt-get -y update',
     'sudo apt-get -y install htop',
+    "sudo wget https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install -O install_aws_inspector",
+    "sudo bash install_aws_inspector",
+    "sudo rm install_aws_inspector",
 ]
 
 def get_user_data():
